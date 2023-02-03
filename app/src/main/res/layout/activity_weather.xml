@@ -9,6 +9,8 @@
     android:background="@drawable/gradient_bg"
     tools:context=".MainActivity">
 
+    <!--Setting up screen UIs-->
+    <!--ID's are set to enable us to reference the field within our activity-->
     <RelativeLayout
         android:id="@+id/mainContainer"
         android:visibility="visible"

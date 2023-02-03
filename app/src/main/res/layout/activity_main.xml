@@ -7,6 +7,8 @@
     android:background="@drawable/gradient_bg"
     tools:context=".MainActivity">
 
+    <!--Setting up screen UIs-->
+    <!--ID's are set on components to enable us to reference the field within our activity-->
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"

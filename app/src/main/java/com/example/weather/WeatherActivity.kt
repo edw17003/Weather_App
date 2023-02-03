@@ -21,6 +21,7 @@ class WeatherActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather)
 
+        // gets city parameter from MainActivity to be used in api call
         CITY = intent.getStringExtra("CITY")
 
         weatherTask().execute()
@@ -37,6 +38,7 @@ class WeatherActivity : AppCompatActivity() {
 
         override fun doInBackground(vararg params: String?): String? {
             var response:String?
+            // Try calling the api, if we get an error, set the response to null and return it
             try{
                 response = URL("https://api.openweathermap.org/data/2.5/weather?q=$CITY,US&units=imperial&appid=$API").readText(
                     Charsets.UTF_8
@@ -50,7 +52,7 @@ class WeatherActivity : AppCompatActivity() {
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
             try {
-                /* Extracting JSON returns from the API */
+                /* Extracting JSON data returned from the API into variables */
                 val jsonObj = JSONObject(result)
                 val main = jsonObj.getJSONObject("main")
                 val sys = jsonObj.getJSONObject("sys")
@@ -90,7 +92,7 @@ class WeatherActivity : AppCompatActivity() {
                 findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
                 findViewById<RelativeLayout>(R.id.mainContainer).visibility = View.VISIBLE
 
-            } catch (e: Exception) {
+            } catch (e: Exception) { // If the api call fails, remove the loader and set the error text to visible
                 findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
                 findViewById<TextView>(R.id.errorText).visibility = View.VISIBLE
             }

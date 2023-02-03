@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
         var searchButton = findViewById<Button>(R.id.searchButton)
 
+        // When the 'searchButton' is clicked, call the callActivity function
         searchButton.setOnClickListener {
             callActivity()
         }
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         val editText = findViewById<EditText>(R.id.cityText)
         val content = editText.text.toString()
 
+        // intent is used for switching to the next screen. We add the city input to the intent and pass it to the next screen (WeatherActivity)
         val intent = Intent(this, WeatherActivity::class.java).also {
             it.putExtra("CITY", content)
             startActivity(it)
