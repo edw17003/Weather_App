@@ -2,6 +2,7 @@ package com.example.weather
 
 import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
@@ -13,12 +14,14 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class WeatherActivity : AppCompatActivity() {
-    val CITY: String = "Rexburg,US"
+    var CITY: String? = ""
     val API: String = "b1159721bd65dac769dcd4f88420a53a"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather)
+
+        CITY = intent.getStringExtra("CITY")
 
         weatherTask().execute()
     }
@@ -35,7 +38,7 @@ class WeatherActivity : AppCompatActivity() {
         override fun doInBackground(vararg params: String?): String? {
             var response:String?
             try{
-                response = URL("https://api.openweathermap.org/data/2.5/weather?q=$CITY&units=imperial&appid=$API").readText(
+                response = URL("https://api.openweathermap.org/data/2.5/weather?q=$CITY,US&units=imperial&appid=$API").readText(
                     Charsets.UTF_8
                 )
             }catch (e: Exception){
